@@ -1,0 +1,33 @@
+{
+  "name": "ai_playwrightautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SayanGanguli/AI_PlaywrightAutomation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SayanGanguli/AI_PlaywrightAutomation/issues"
+  },
+  "homepage": "https://github.com/SayanGanguli/AI_PlaywrightAutomation#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
+    "eslint": "^10.8.1",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.6",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.67.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}
