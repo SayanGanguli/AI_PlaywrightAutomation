@@ -6,6 +6,7 @@ test('homepage title', async ({ page }) => {
 
     await google.navigateToHomePage()
     await google.expectTitle("Google")
+    await new Promise(resolve => setTimeout(resolve, 20000));
     await google.clickElement('label','Gmail')
     
 });

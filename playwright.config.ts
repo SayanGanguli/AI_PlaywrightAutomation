@@ -5,25 +5,75 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './tests',
+
   fullyParallel: true,
+
   forbidOnly: !!process.env.CI,
+
   retries: process.env.CI ? 2 : 0,
+
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+
+  // Maximum time allowed for each test.
+  timeout: 50_000,
+
+  // Maximum time allowed for each assertion.
+  expect: {
+    timeout: 50_000,
+  },
+
+  // Directory for screenshots, videos and traces.
+  outputDir: './test-results',
+
+  // HTML report + JUnit report for CI/CD integration.
+  reporter: [
+    [
+      'html',
+      {
+        outputFolder: './playwright-report',
+        open: 'never',
+      },
+    ],
+    [
+      'junit',
+      {
+        outputFile: './test-results/results.xml',
+      },
+    ],
+  ],
 
   use: {
+    // QA environment URL.
     baseURL: 'https://www.google.com/',
+
+    // Maximum time for individual Playwright actions.
+    actionTimeout: 30_000,
+
+    // Maximum time for navigation.
+    navigationTimeout: 30_000,
+
+    // Debugging artifacts.
+    screenshot: 'only-on-failure',
     trace: 'on-first-retry',
-    screenshot: 'on',
     video: 'retain-on-failure',
   },
 
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: false,
+        viewport: null,
+        launchOptions: {
+          args: ['--start-maximized'], // ensures browser starts maximized
+        },
+        deviceScaleFactor: undefined,
+      },      
     },
 
+    // Enable when cross-browser execution is ready.
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'] },
