@@ -22,12 +22,12 @@ export abstract class BasePage {
         return this.page.url();
     }
 
-    async click_element(strategy: LocatorStrategy, options?: any) {
-        const locator = this.factory.getLocator(strategy, options)
+    async clickElement(strategy: LocatorStrategy, value:string) {
+        const locator = this.factory.getLocator(strategy, value)
         await locator.click()
     }
 
-    async enter_text(strategy: LocatorStrategy, value: string): Promise<void> {
+    async enterText(strategy: LocatorStrategy, value: string): Promise<void> {
         const locator = await this.factory.getLocator(strategy);
         await locator.fill(value)
     }
@@ -70,8 +70,8 @@ export abstract class BasePage {
         await expect(this.page).toHaveURL(url);
     }
 
-    async expectTitle(page_title: string): Promise<void> {
-        await expect(this.page).toHaveTitle(page_title)
+    async expectTitle(pageTitle: string): Promise<void> {
+        await expect(this.page).toHaveTitle(pageTitle)
     }
 
 

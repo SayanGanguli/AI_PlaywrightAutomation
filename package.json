@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Enterprise Playwright automation framework using TypeScript",
   "license": "ISC",
-
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
@@ -17,13 +16,13 @@
     "format:check": "prettier --check .",
     "clean": "node scripts/cleanup.ts"
   },
-
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",
     "@types/node": "^26.2.0",
     "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",
+    "jiti": "^2.7.0",
     "prettier": "^3.9.6",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",

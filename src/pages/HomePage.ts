@@ -1,5 +1,4 @@
 import { BasePage } from "./BasePage";
-import { LocatorFactory } from "../utils/LocatorFactory";
 
 export class GooglePage extends BasePage{
     

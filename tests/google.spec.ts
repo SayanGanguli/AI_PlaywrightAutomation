@@ -1,12 +1,11 @@
-import { test, expect } from '@playwright/test';
-import { LocatorFactory } from '../src/utils/LocatorFactory';
+import { test } from '@playwright/test';
 import { GooglePage } from '../src/pages/HomePage'
 
 test('homepage title', async ({ page }) => {
-    let google = new GooglePage(page)
+    const google = new GooglePage(page)
 
-    google.navigateToHomePage()
-    google.expectTitle("Google")
-    google.click_element('label','Gmail')
+    await google.navigateToHomePage()
+    await google.expectTitle("Google")
+    await google.clickElement('label','Gmail')
     
 });
