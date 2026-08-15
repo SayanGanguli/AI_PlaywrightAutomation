@@ -1,49 +1,32 @@
 import { Page, Locator } from '@playwright/test';
 
 export type LocatorStrategy =
-    | 'text'
-    | 'role'
-    | 'label'
-    | 'placeholder'
-    | 'alt'
-    | 'testId'
-    | 'selector'
+  | 'text'
+  | 'role'
+  | 'label'
+  | 'placeholder'
+  | 'alt'
+  | 'testId'
+  | 'selector';
 
-export class LocatorFactory {
+export function LocatorFactory(page: Page) {
+  return {
+    getLocator(strategy: LocatorStrategy, value: string = "", options?: any): Locator {
+      const strategyMap: Record<LocatorStrategy, () => Locator> = {
+        text: () => page.getByText(value, options),
+        role: () => page.getByRole(value as any, options),
+        label: () => page.getByLabel(value, options),
+        placeholder: () => page.getByPlaceholder(value, options),
+        alt: () => page.getByAltText(value, options),
+        testId: () => page.getByTestId(value),
+        selector: () => page.locator(value, options),
+      };
 
-    protected readonly page:Page
-    
-    constructor(page:Page){
-         this.page = page
+      const locatorBuilder = strategyMap[strategy];
+      if (!locatorBuilder) {
+        throw new Error(`Unsupported locator strategy: ${strategy}`);
+      }
+      return locatorBuilder();
     }
-
-    getLocator(strategy: LocatorStrategy, value: string="", options?:any): Locator {
-        const strategyMap: Record<LocatorStrategy, () => Locator> = {
-
-            text: () => this.page.getByText(value, options),
-
-            role: () => this.page.getByRole(value as any, options),
-
-            label: () => this.page.getByLabel(value, options),
-
-            placeholder: () => this.page.getByPlaceholder(value, options),
-
-            alt: () => this.page.getByAltText(value, options),
-
-            testId: () => this.page.getByTestId(value),
-
-            selector: () => this.page.locator(value, options)
-        }
-
-        const locatorBuilder = strategyMap[strategy];
-
-        if (!locatorBuilder) {
-            throw new Error(`Unsupported locator strategy: ${strategy}`);
-        }
-
-        return locatorBuilder();
-
-    }
+  };
 }
-
-
