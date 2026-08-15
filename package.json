@@ -1,20 +1,23 @@
 {
-  "name": "ai_playwrightautomation",
+  "name": "ai_playwright_automation",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SayanGanguli/AI_PlaywrightAutomation.git"
-  },
-  "keywords": [],
-  "author": "",
+  "description": "Enterprise Playwright automation framework using TypeScript",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SayanGanguli/AI_PlaywrightAutomation/issues"
+
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:regression": "playwright test tests/regression",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "clean": "node scripts/cleanup.ts"
   },
-  "homepage": "https://github.com/SayanGanguli/AI_PlaywrightAutomation#readme",
+
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.62.1",
