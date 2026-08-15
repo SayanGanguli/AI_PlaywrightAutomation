@@ -3,8 +3,7 @@ import { LocatorFactory } from '../src/utils/LocatorFactory';
 import { GooglePage } from '../src/pages/HomePage'
 
 test('homepage title', async ({ page }) => {
-    let factory = new LocatorFactory(page)
-    let google = new GooglePage(factory)
+    let google = new GooglePage(page)
 
     google.navigateToHomePage()
     google.expectTitle("Google")
