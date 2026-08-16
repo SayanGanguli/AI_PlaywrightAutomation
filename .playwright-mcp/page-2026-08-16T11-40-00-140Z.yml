@@ -1,0 +1,74 @@
+- generic [active] [ref=f80e1]:
+  - banner [ref=f80e2]:
+    - generic [ref=f80e5]:
+      - link [ref=f80e8] [cursor=pointer]:
+        - /url: /
+        - img "Automation Exercise website" [ref=f80e9]
+      - list [ref=f80e12]:
+        - listitem [ref=f80e13]:
+          - link " Home" [ref=f80e14] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f80e15]: 
+            - text: Home
+        - listitem [ref=f80e16]:
+          - link " Products" [ref=f80e17] [cursor=pointer]:
+            - /url: /products
+            - generic [ref=f80e18]: 
+            - text: Products
+        - listitem [ref=f80e19]:
+          - link " Cart" [ref=f80e20] [cursor=pointer]:
+            - /url: /view_cart
+            - generic [ref=f80e21]: 
+            - text: Cart
+        - listitem [ref=f80e22]:
+          - link " Signup / Login" [ref=f80e23] [cursor=pointer]:
+            - /url: /login
+            - generic [ref=f80e24]: 
+            - text: Signup / Login
+        - listitem [ref=f80e25]:
+          - link " Test Cases" [ref=f80e26] [cursor=pointer]:
+            - /url: /test_cases
+            - generic [ref=f80e27]: 
+            - text: Test Cases
+        - listitem [ref=f80e28]:
+          - link " API Testing" [ref=f80e29] [cursor=pointer]:
+            - /url: /api_list
+            - generic [ref=f80e30]: 
+            - text: API Testing
+        - listitem [ref=f80e31]:
+          - link " Video Tutorials" [ref=f80e32] [cursor=pointer]:
+            - /url: https://www.youtube.com/c/AutomationExercise
+            - generic [ref=f80e33]: 
+            - text: Video Tutorials
+        - listitem [ref=f80e34]:
+          - link " Contact us" [ref=f80e35] [cursor=pointer]:
+            - /url: /contact_us
+            - generic [ref=f80e36]: 
+            - text: Contact us
+  - generic [ref=f80e40]:
+    - heading "Account Created!" [level=2] [ref=f80e41]
+    - paragraph [ref=f80e42]:
+      - text: Congratulations! Your new account has been successfully created!
+      - link "Account creation guides" [ref=f80e43] [cursor=pointer]
+    - paragraph [ref=f80e47]:
+      - text: You can now take advantage of member privileges to enhance your online
+      - link "shopping" [ref=f80e48] [cursor=pointer]:
+        - /url: "#"
+      - text: experience with us.
+    - link "Continue" [ref=f80e52] [cursor=pointer]:
+      - /url: /
+  - contentinfo [ref=f80e53]:
+    - generic [ref=f80e58]:
+      - heading "Subscription" [level=2] [ref=f80e59]
+      - generic [ref=f80e60]:
+        - textbox "Your email address" [ref=f80e61]
+        - button "" [ref=f80e62] [cursor=pointer]
+        - paragraph [ref=f80e64]: Get the most recent updates from our site and be updated your self...
+    - paragraph [ref=f80e68]: Copyright © 2021 All rights reserved
+  - text: 
+  - insertion [ref=f80e70]:
+    - generic [ref=f80e73]:
+      - heading "These are topics related to the article that might interest you" [level=2] [ref=f80e75]: Discover more
+      - link "Website update notifications" [ref=f80e76] [cursor=pointer]
+      - link "How-To, DIY & Expert Content" [ref=f80e81] [cursor=pointer]
+      - link "Libraries" [ref=f80e86] [cursor=pointer]

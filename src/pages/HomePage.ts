@@ -1,8 +1,11 @@
-import { BasePage } from "./BasePage";
+import { BasePage } from './BasePage';
 
-export class GooglePage extends BasePage{
-    
-    public async navigateToHomePage(): Promise<void> {
-        await this.navigateTo("/");
-    }
+export class HomePage extends BasePage {
+  public async navigateToHomePage(): Promise<void> {
+    await this.navigateTo('/');
+  }
+
+  public async clickSignupLogin(): Promise<void> {
+    await this.clickElement('selector', 'a[href="/login"]');
+  }
 }

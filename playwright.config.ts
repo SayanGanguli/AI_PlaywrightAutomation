@@ -1,5 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+import * as dotenv from 'dotenv';
+import path from 'path';
 
+dotenv.config({
+  path: path.resolve(__dirname, 'config/environments/qa.env'),
+});
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -15,11 +20,11 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
 
   // Maximum time allowed for each test.
-  timeout: 50_000,
+  timeout: 30_000,
 
   // Maximum time allowed for each assertion.
   expect: {
-    timeout: 50_000,
+    timeout: 30_000,
   },
 
   // Directory for screenshots, videos and traces.
@@ -44,7 +49,7 @@ export default defineConfig({
 
   use: {
     // QA environment URL.
-    baseURL: 'https://www.google.com/',
+    baseURL: process.env.BASE_URL,
 
     // Maximum time for individual Playwright actions.
     actionTimeout: 30_000,

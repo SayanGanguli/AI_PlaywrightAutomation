@@ -1,0 +1,76 @@
+- generic [active] [ref=f28e1]:
+  - banner [ref=f28e2]:
+    - generic [ref=f28e5]:
+      - link [ref=f28e8] [cursor=pointer]:
+        - /url: /
+        - img "Website for automation practice" [ref=f28e9]
+      - list [ref=f28e12]:
+        - listitem [ref=f28e13]:
+          - link " Home" [ref=f28e14] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f28e15]: 
+            - text: Home
+        - listitem [ref=f28e16]:
+          - link " Products" [ref=f28e17] [cursor=pointer]:
+            - /url: /products
+            - generic [ref=f28e18]: 
+            - text: Products
+        - listitem [ref=f28e19]:
+          - link " Cart" [ref=f28e20] [cursor=pointer]:
+            - /url: /view_cart
+            - generic [ref=f28e21]: 
+            - text: Cart
+        - listitem [ref=f28e22]:
+          - link " Signup / Login" [ref=f28e23] [cursor=pointer]:
+            - /url: /login
+            - generic [ref=f28e24]: 
+            - text: Signup / Login
+        - listitem [ref=f28e25]:
+          - link " Test Cases" [ref=f28e26] [cursor=pointer]:
+            - /url: /test_cases
+            - generic [ref=f28e27]: 
+            - text: Test Cases
+        - listitem [ref=f28e28]:
+          - link " API Testing" [ref=f28e29] [cursor=pointer]:
+            - /url: /api_list
+            - generic [ref=f28e30]: 
+            - text: API Testing
+        - listitem [ref=f28e31]:
+          - link " Video Tutorials" [ref=f28e32] [cursor=pointer]:
+            - /url: https://www.youtube.com/c/AutomationExercise
+            - generic [ref=f28e33]: 
+            - text: Video Tutorials
+        - listitem [ref=f28e34]:
+          - link " Contact us" [ref=f28e35] [cursor=pointer]:
+            - /url: /contact_us
+            - generic [ref=f28e36]: 
+            - text: Contact us
+  - generic [ref=f28e39]:
+    - generic [ref=f28e41]:
+      - heading "Login to your account" [level=2] [ref=f28e42]
+      - generic [ref=f28e43]:
+        - textbox "Email Address" [ref=f28e44]
+        - textbox "Password" [ref=f28e45]
+        - button "Login" [ref=f28e46] [cursor=pointer]
+    - heading "OR" [level=2] [ref=f28e48]
+    - generic [ref=f28e50]:
+      - heading "New User Signup!" [level=2] [ref=f28e51]
+      - generic [ref=f28e52]:
+        - textbox "Name" [ref=f28e53]
+        - textbox "Email Address" [ref=f28e54]
+        - button "Signup" [ref=f28e55] [cursor=pointer]
+  - contentinfo [ref=f28e56]:
+    - generic [ref=f28e61]:
+      - heading "Subscription" [level=2] [ref=f28e62]
+      - generic [ref=f28e63]:
+        - textbox "Your email address" [ref=f28e64]
+        - button "" [ref=f28e65] [cursor=pointer]
+        - paragraph [ref=f28e67]: Get the most recent updates from our site and be updated your self...
+    - paragraph [ref=f28e71]: Copyright © 2021 All rights reserved
+  - text: 
+  - insertion [ref=f28e73]:
+    - generic [ref=f28e76]:
+      - heading "These are topics related to the article that might interest you" [level=2] [ref=f28e78]: Discover more
+      - link "Software testing books" [ref=f28e79] [cursor=pointer]
+      - link "API testing tools" [ref=f28e84] [cursor=pointer]
+      - link "Test case management" [ref=f28e89] [cursor=pointer]
