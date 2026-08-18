@@ -1,41 +1,51 @@
 import { test } from '@playwright/test';
+import { createUserData } from '../src/test-data/userData';
 import { HomePage } from '../src/pages/HomePage';
 import { LoginPage } from '../src/pages/LoginPage';
 import { SignupPage } from '../src/pages/SignUpPage';
 import { AccountCreatedPage } from '../src/pages/AccountCreatedPage';
+import { AccountDeletedPage } from '../src/pages/AccountDeletedPage';
 
 test('AutomationExercise Test Case 1 - Register User', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const loginPage = new LoginPage(page);
-    const signupPage = new SignupPage(page);
-    const accountCreatedPage = new AccountCreatedPage(page);
+  const homePage = new HomePage(page);
+  const loginPage = new LoginPage(page);
+  const signupPage = new SignupPage(page);
+  const accountCreatedPage = new AccountCreatedPage(page);
+  const accountDeletedPage = new AccountDeletedPage(page);
 
-    const uniqueEmail = `qa.user.${Date.now()}@mailinator.com`;
+  const userData = createUserData();
 
-    await homePage.navigateToHomePage();
-    await homePage.clickSignupLogin();
+  await homePage.navigateToHomePage();
+  await homePage.clickSignupLogin();
 
-    await loginPage.signupNewUser('QA User', uniqueEmail);
+  await loginPage.signupNewUser(userData.name, userData.email);
 
-    await signupPage.expectAccountInformationVisible();
-    await signupPage.selectTitle('Mr.');
+  await signupPage.expectAccountInformationVisible();
 
-    await signupPage.fillAccountDetails({
-        password: 'Test@1234',
-        day: '1',
-        month: 'January',
-        year: '1990',
-        firstName: 'QA',
-        lastName: 'User',
-        company: 'Automation',
-        address: '123 Main Street',
-        country: 'India',
-        state: 'California',
-        city: 'Los Angeles',
-        zipcode: '90001',
-        mobileNumber: '1234567890',
-    });
+  await signupPage.selectTitle('Mr.');
 
-    await accountCreatedPage.expectAccountCreated();
-    await accountCreatedPage.clickContinue();
+  await signupPage.fillAccountDetails({
+    password: userData.password,
+    day: userData.day,
+    month: userData.month,
+    year: userData.year,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    company: userData.company,
+    address: userData.address,
+    country: userData.country,
+    state: userData.state,
+    city: userData.city,
+    zipcode: userData.zipcode,
+    mobileNumber: userData.mobileNumber,
+  });
+
+  await accountCreatedPage.expectAccountCreated();
+  await accountCreatedPage.clickContinue();
+
+  await homePage.expectLoggedInUser(userData.name);
+  await homePage.clickDeleteAccount();
+
+  await accountDeletedPage.expectAccountDeleted();
+  await accountDeletedPage.clickContinue();
 });

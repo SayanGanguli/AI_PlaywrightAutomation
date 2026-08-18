@@ -3,11 +3,12 @@ import { LocatorFactory, LocatorStrategy } from '../utils/LocatorFactory';
 
 export abstract class BasePage {
   protected readonly page: Page;
-  protected readonly factory!: ReturnType<typeof LocatorFactory>;
+  //protected readonly factory!: ReturnType<typeof LocatorFactory>;
+  protected readonly factory: LocatorFactory;
 
   constructor(page: Page) {
     this.page = page;
-    this.factory = LocatorFactory(page);
+    this.factory = new LocatorFactory(page);
   }
 
   async navigateTo(path: string): Promise<void> {

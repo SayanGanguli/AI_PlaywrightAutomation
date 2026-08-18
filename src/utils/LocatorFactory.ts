@@ -9,33 +9,45 @@ export type LocatorStrategy =
   | 'testId'
   | 'selector';
 
-export function LocatorFactory(page: Page) {
-  const strategyMap: Record<
-    LocatorStrategy, 
-    (value: string, options?: Record<string, unknown>) => Locator > = {
-    text: (value, options) => page.getByText(value, options),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    role: (value, options) => page.getByRole(value as any, options),
-    label: (value, options) => page.getByLabel(value, options),
-    placeholder: (value, options) => page.getByPlaceholder(value, options),
-    alt: (value, options) => page.getByAltText(value, options),
-    testId: (value) => page.getByTestId(value),
-    selector: (value, options) => page.locator(value, options),
-  };
+export class LocatorFactory {
+  private readonly page: Page;
 
-  return {
-    getLocator(
-      strategyType: LocatorStrategy,
-      strategyValue: string,
-      options?: Record<string, unknown>,
-    ): Locator {
-      const locatorBuilder = strategyMap[strategyType];
+  constructor(page: Page) {
+    this.page = page;
+  }
 
-      if (!locatorBuilder) {
-        throw new Error(`Unsupported locator strategy: ${strategyType}`);
-      }
+  getLocator(
+    strategy: LocatorStrategy,
+    value: string,
+    options?: Record<string, unknown>,
+  ): Locator {
+    switch (strategy) {
+      case 'text':
+        return this.page.getByText(value, options);
 
-      return locatorBuilder(strategyValue, options);
-    },
-  };
+      case 'role':
+        return this.page.getByRole(
+          value as Parameters<Page['getByRole']>[0],
+          options,
+        );
+
+      case 'label':
+        return this.page.getByLabel(value, options);
+
+      case 'placeholder':
+        return this.page.getByPlaceholder(value, options);
+
+      case 'alt':
+        return this.page.getByAltText(value, options);
+
+      case 'testId':
+        return this.page.getByTestId(value);
+
+      case 'selector':
+        return this.page.locator(value, options);
+
+      default:
+        throw new Error(`Unsupported locator strategy: ${strategy}`);
+    }
+  }
 }
