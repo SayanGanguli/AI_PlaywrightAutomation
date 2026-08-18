@@ -2,9 +2,21 @@ import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config({
-  path: path.resolve(__dirname, 'config/environments/qa.env'),
+const environment = process.env.TEST_ENV ?? 'qa';
+const environmentFile = path.resolve(
+  __dirname,
+  `config/environments/${environment}.env`,
+);
+
+const environmentConfig = dotenv.config({
+  path: environmentFile,
 });
+
+if (environmentConfig.error) {
+  throw new Error(
+    `Environment configuration not found: ${environmentFile}`,
+  );
+}
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -75,7 +87,7 @@ export default defineConfig({
           args: ['--start-maximized'], // ensures browser starts maximized
         },
         deviceScaleFactor: undefined,
-      },      
+      },
     },
 
     // Enable when cross-browser execution is ready.
