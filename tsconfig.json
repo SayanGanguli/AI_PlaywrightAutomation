@@ -26,7 +26,7 @@
     "src/**/*.ts",
     "tests/**/*.ts",
     "playwright.config.ts"
-  ],
+, "src/ai/llmClient.js"  ],
 
   "exclude": [
     "node_modules",
