@@ -1,19 +1,16 @@
-import { test } from '@playwright/test';
-import { createUserData } from '../src/test-data/userData';
+import { test } from '../src/fixtures/global_setUp';
 import { HomePage } from '../src/pages/HomePage';
 import { LoginPage } from '../src/pages/LoginPage';
 import { SignupPage } from '../src/pages/SignUpPage';
 import { AccountCreatedPage } from '../src/pages/AccountCreatedPage';
 import { AccountDeletedPage } from '../src/pages/AccountDeletedPage';
 
-test('AutomationExercise Test Case 1 - Register User', async ({ page }) => {
+test('AutomationExercise Test Case 1 - Register User', async ({ page, testUser: userData }) => {
   const homePage = new HomePage(page);
   const loginPage = new LoginPage(page);
   const signupPage = new SignupPage(page);
   const accountCreatedPage = new AccountCreatedPage(page);
   const accountDeletedPage = new AccountDeletedPage(page);
-
-  const userData = createUserData();
 
   await homePage.navigateToHomePage();
   await homePage.clickSignupLogin();
