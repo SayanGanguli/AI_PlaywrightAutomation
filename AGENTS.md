@@ -3,9 +3,10 @@
 ## Project Overview
 
 - This repository contains end-to-end tests built with Playwright Test and TypeScript.
-- Tests live in `tests/`.
+- Executable tests live in `tests/`.
+- Planner design artifacts live in `test-plan/`.
 - Shared fixtures, page objects, components, test data, and utilities belong under `src/`.
-- Playwright is configured in `playwright.confg.ts`.
+- Playwright is configured in `playwright.config.ts`.
 
 ## Development Guidelines
 
@@ -26,25 +27,3 @@ Before submitting changes:
 
    ```bash
    npx playwright test tests/<name>.spec.ts
-   ```
-
-2. Run the full cross-browser suite when the change is complete:
-
-   ```bash
-   npx playwright test
-   ```
-
-3. Check formatting:
-
-   ```bash
-   npx prettier --check .
-   ```
-
-Use `CI=true` when validating CI-specific behavior such as retries and worker limits.
-
-## Change Expectations
-
-- Keep changes focused and preserve existing public APIs and project structure.
-- Add or update tests for behavioral changes.
-- Review the generated HTML report and failure artifacts when a test fails.
-- Do not commit changes unless explicitly requested.
