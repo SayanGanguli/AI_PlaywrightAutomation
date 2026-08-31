@@ -1,10 +1,10 @@
 import 'dotenv/config';
 
 export const loginPageUrl = process.env.PARABANK_URL ?? 'https://parabank.parasoft.com/parabank/index.htm';
-export const loginHeading = 'h1:has-text("Customer Login")';
+export const loginHeading = 'h2:has-text("Customer Login")';
 export const usernameInput = 'input[name="username"]';
 export const passwordInput = 'input[name="password"]';
-export const loginButton = 'button:has-text("Log In")';
+export const loginButton = 'input[type="submit"][value="Log In"]';
 export const invalidCredentialsMessage = /invalid username or password/i;
 export const loginPageTitle = 'ParaBank | Welcome | Online Banking';
 
