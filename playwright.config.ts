@@ -1,4 +1,16 @@
+import 'dotenv/config';
 import { defineConfig, devices } from '@playwright/test';
+
+const browserName = (process.env.BROWSER_NAME ?? 'chromium').toLowerCase();
+const browserMode = (process.env.BROWSER_MODE ?? 'maximize').toLowerCase();
+
+const browserConfigs = {
+  chromium: devices['Desktop Chrome'],
+  firefox: devices['Desktop Firefox'],
+  webkit: devices['Desktop Safari'],
+} as const;
+
+const selectedBrowser = browserConfigs[browserName as keyof typeof browserConfigs] ?? devices['Desktop Chrome'];
 
 export default defineConfig({
   testDir: './tests',
@@ -14,34 +26,22 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    //baseURL: 'http://localhost:3000',
-
     trace: 'on-first-retry',
-
     screenshot: 'only-on-failure',
-
     video: 'retain-on-failure',
+    launchOptions:
+      browserMode === 'maximize'
+        ? {
+            args: ['--start-maximized'],
+          }
+        : undefined,
   },
 
   projects: [
     {
-      name: 'chromium',
+      name: browserName,
       use: {
-        ...devices['Desktop Chrome'],
-      },
-    },
-
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
-
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
+        ...selectedBrowser,
       },
     },
   ],

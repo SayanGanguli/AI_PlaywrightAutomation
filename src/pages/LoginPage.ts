@@ -1,18 +1,14 @@
 import { expect, Page } from '@playwright/test';
 import {
-  accountOverviewPageTitle,
   accountServicesHeading,
   accountsHeading,
-  balanceText,
-  invalidCredentialsMessage,
   loginButton,
   loginHeading,
-  loginPageTitle,
-  loginPageUrl,
   passwordInput,
   usernameInput,
-  welcomeText,
+  getConfig,
 } from '../components/Helper';
+import { getAccountOverviewData, getMessages } from '../utils/testData';
 
 export class LoginPage {
   readonly page: Page;
@@ -22,8 +18,9 @@ export class LoginPage {
   }
 
   async open(): Promise<void> {
-    await this.page.goto(loginPageUrl);
-    await expect(this.page).toHaveTitle(loginPageTitle);
+    const config = getConfig();
+    await this.page.goto(config.url);
+    await expect(this.page).toHaveTitle(config.loginPageTitle);
     await expect(this.page.locator(loginHeading)).toBeVisible();
     await expect(this.page.locator(usernameInput)).toBeVisible();
     await expect(this.page.locator(passwordInput)).toBeVisible();
@@ -44,19 +41,24 @@ export class LoginPage {
 
   async loginWithInvalidCredentials(username: string, password: string): Promise<void> {
     await this.login(username, password);
-    await expect(this.page.getByText(invalidCredentialsMessage)).toBeVisible();
+    await expect(this.page.getByText(getMessages().invalidCredentials, { exact: false })).toBeVisible();
   }
 
   async expectNoAuthenticatedAccount(): Promise<void> {
-    await expect(this.page.getByText(welcomeText)).not.toBeVisible();
+    const accountOverviewData = getAccountOverviewData();
+
+    await expect(this.page.getByText(accountOverviewData.welcomeText)).not.toBeVisible();
     await expect(this.page.locator(accountServicesHeading)).not.toBeVisible();
     await expect(this.page.locator(accountsHeading)).not.toBeVisible();
-    await expect(this.page.getByText(balanceText)).not.toBeVisible();
+    await expect(this.page.getByText(accountOverviewData.balanceText, { exact: false })).not.toBeVisible();
   }
 
   async expectLoginPageVisibleAfterLogout(): Promise<void> {
-    await expect(this.page).toHaveTitle(loginPageTitle);
+    const config = getConfig();
+    const accountOverviewData = getAccountOverviewData();
+
+    await expect(this.page).toHaveTitle(config.loginPageTitle);
     await expect(this.page.locator(loginHeading)).toBeVisible();
-    await expect(this.page.getByText(welcomeText)).not.toBeVisible();
+    await expect(this.page.getByText(accountOverviewData.welcomeText)).not.toBeVisible();
   }
 }

@@ -1,0 +1,9 @@
+{
+  "accountOverview": {
+    "welcomeText": "Welcome John Smith",
+    "balanceText": "$5022.93"
+  },
+   "messages": {
+    "invalidCredentials": "The username and password could not be verified."
+  }
+}

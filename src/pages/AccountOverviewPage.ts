@@ -1,15 +1,14 @@
 import { expect, Page } from '@playwright/test';
 import {
-  accountOverviewPageTitle,
   accountServicesHeading,
   accountTable,
   accountsHeading,
   accountsOverviewLink,
   balanceIncludesDepositsCell,
-  balanceText,
   logoutLink,
-  welcomeText,
+  getConfig,
 } from '../components/Helper';
+import { getAccountOverviewData } from '../utils/testData';
 
 export class AccountOverviewPage {
   readonly page: Page;
@@ -19,15 +18,19 @@ export class AccountOverviewPage {
   }
 
   async expectOverviewVisible(): Promise<void> {
+    const config = getConfig();
+    const accountOverviewData = getAccountOverviewData();
+
     await expect(this.page).toHaveURL(/\/overview\.htm/);
-    await expect(this.page).toHaveTitle(accountOverviewPageTitle);
-    await expect(this.page.getByText(welcomeText)).toBeVisible();
+    await expect(this.page).toHaveTitle(config.accountOverviewTitle);
+    await expect(this.page.getByText(accountOverviewData.welcomeText)).toBeVisible();
     await expect(this.page.locator(accountServicesHeading)).toBeVisible();
     await expect(this.page.locator(accountsOverviewLink)).toBeVisible();
     await expect(this.page.locator(logoutLink)).toBeVisible();
     await expect(this.page.locator(accountsHeading)).toBeVisible();
     await expect(this.page.locator(accountTable)).toBeVisible();
-    await expect(this.page.getByText(balanceText)).toBeVisible();
+    // Use first() to get the first balance amount in the table
+    await expect(this.page.getByText(accountOverviewData.balanceText, { exact: false }).first()).toBeVisible();
     await expect(this.page.locator(balanceIncludesDepositsCell)).toBeVisible();
   }
 
