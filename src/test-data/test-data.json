@@ -1,9 +1,34 @@
 {
+  "registration": {
+    "firstName": "Test",
+    "lastName": "User",
+    "street": "1 Main Street",
+    "city": "Austin",
+    "state": "TX",
+    "zipCode": "78701",
+    "phone": "555-0100",
+    "ssn": "123-45-6791",
+    "password": "Password123"
+  },
   "accountOverview": {
     "welcomeText": "Welcome John Smith",
     "balanceText": "$5022.93"
   },
-   "messages": {
-    "invalidCredentials": "The username and password could not be verified."
+  "messages": {
+    "invalidCredentials": "The username and password could not be verified.",
+    "registration": {
+      "firstNameRequired": "First name is required.",
+      "lastNameRequired": "Last name is required.",
+      "addressRequired": "Address is required.",
+      "cityRequired": "City is required.",
+      "stateRequired": "State is required.",
+      "zipCodeRequired": "Zip Code is required.",
+      "ssnRequired": "Social Security Number is required.",
+      "usernameRequired": "Username is required.",
+      "passwordRequired": "Password is required.",
+      "confirmationRequired": "Password confirmation is required.",
+      "passwordMismatch": "Passwords did not match.",
+      "duplicateUsername": "This username already exists."
+    }
   }
 }
