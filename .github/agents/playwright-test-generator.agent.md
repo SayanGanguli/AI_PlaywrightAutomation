@@ -85,3 +85,22 @@ application behavior.
    });
    ```
    </example-generation>
+
+
+## Framework Boundary
+
+This agent is primarily responsible for browser exploration and Playwright
+test generation.
+
+Do NOT implement or redesign Page Objects, helpers, fixtures, or test-data
+architecture.
+
+When an existing Page Object is provided by the framework, prefer using it
+rather than placing selectors directly in the generated test.
+
+Do not create placeholder files.
+
+Do not modify unrelated framework files.
+
+The Framework Implementer is responsible for Page Object and framework
+implementation.

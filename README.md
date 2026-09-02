@@ -1,10 +1,14 @@
 # AI Playwright Automation
 
-Enterprise-grade browser automation framework built with Playwright and TypeScript for validating critical web application workflows with speed, reliability, and maintainability.
+An enterprise-level AI-assisted end-to-end test automation framework built with **Playwright** and **TypeScript**.
 
-## Overview
+The framework combines AI-driven test planning, implementation, test artifact generation, execution, and automated failure healing into a structured automation lifecycle.
 
-This repository provides a scalable automation foundation for end-to-end testing of customer-facing web experiences. The current implementation targets the ParaBank application and covers login and account overview validation flows, using a structured Page Object Model, reusable fixtures, and accessible locator strategies.
+---
+
+## 🚀 Overview
+
+The framework transforms a natural-language testing requirement into an executable Playwright test.
 
 The project is designed for:
 
@@ -14,85 +18,313 @@ The project is designed for:
 - CI-friendly execution and reporting
 - Maintainable automation standards consistent with enterprise QA practices
 
----
-
-## Tech Stack
-
-- TypeScript
-- Playwright Test
-- HTML reporting
-- Cross-browser execution: Chromium, Firefox, WebKit
-- Page Object Model (POM)
-- Centralized utilities and fixtures
-
----
-
-## Project Structure
+### AI Automation Lifecycle
 
 ```text
-.
-├── AGENTS.md
-├── LICENSE
-├── README.md
-├── package.json
-├── playwright.config.ts
-├── tsconfig.json
-├── src/
-│   ├── components/
-│   ├── fixtures/
-│   ├── global-setup.ts
-│   ├── global-teardown.ts
-│   ├── pages/
-│   │   ├── BasePage.ts
-│   │   ├── HomePage.ts
-│   │   ├── LoginPage.ts
-│   │   └── SignUpPage.ts
-│   ├── test-data/
-│   └── utils/
-│       └── LocatorFactory.ts
-├── test-plan/
-│   └── parabank-login-account-overview.plan.md
-├── test-results/
-├── tests/
-│   └── parabank-login-account-overview/
-│       ├── negative-login-rejects-invalid-credentials.spec.ts
-│       └── positive-login-displays-account-overview.spec.ts
-└── playwright-report/
+                 User Requirement
+                        │
+                        ▼
+                    ┌────────┐
+                    │ Planner│
+                    └────┬───┘
+                         │
+                         ▼
+                    Test Plan
+                         │
+                         ▼
+                 ┌──────────────┐
+                 │ Implementer  │
+                 └──────┬───────┘
+                        │
+                        ▼
+                 Playwright Test
+                        │
+                        ▼
+                  ┌───────────┐
+                  │ Generator │
+                  └─────┬─────┘
+                        │
+                        ▼
+              Supporting Artifacts
+                        │
+                        ▼
+                 Test Execution
+                        │
+                    Failure?
+                    /     \
+                  No       Yes
+                  │         │
+                  ▼         ▼
+                Pass     ┌────────┐
+                         │ Healer │
+                         └────┬───┘
+                              │
+                              ▼
+                         Fix & Retry
+                              │
+                              ▼
+                           Verify
 ```
 
-### Key directories
+---
 
-- `src/pages/`: page classes encapsulating UI flows and reusable interaction methods
-- `src/fixtures/`: shared browser/test setup patterns
-- `src/test-data/`: test inputs and scenario data
-- `src/utils/`: shared helper utilities such as locator abstraction
-- `tests/`: executable Playwright specs
-- `test-plan/`: test design and scenario documentation
+# 🧠 AI Agents
+
+The framework uses four specialized agents.
+
+## 1. Planner
+
+The **Planner** converts a natural-language requirement into a structured test plan.
+
+### Responsibilities
+
+* Understand the business requirement
+* Identify the application workflow
+* Define preconditions
+* Identify required test data
+* Define test steps
+* Define expected results
+* Identify reusable framework components
+
+Planner artifacts are stored under:
+
+```text
+test-plan/
+```
 
 ---
 
-## Test Strategy
+## 2. Implementer
 
-The framework follows an enterprise-grade approach centered on maintainability and confidence:
+The **Implementer** converts the approved test plan into executable Playwright automation.
 
-- Prefer user-centric, accessible selectors like `getByRole`, `getByLabel`, and `getByText`
-- Encapsulate UI actions in page objects instead of embedding them directly in specs
-- Keep tests independent and parallel-safe
-- Use explicit wait conditions rather than arbitrary timeouts
-- Separate business logic from browser implementation details
-- Maintain reusable fixtures for consistent test setup and teardown
+### Responsibilities
+
+* Analyze the test plan
+* Inspect existing framework code
+* Reuse existing page objects and flows
+* Create or update Playwright tests
+* Implement required business workflows
+* Add appropriate assertions
+
+Executable tests are stored under:
+
+```text
+tests/
+```
 
 ---
 
-## Prerequisites
+## 3. Generator
 
-Before running the suite, install the required tooling:
+The **Generator** creates supporting automation artifacts when required.
 
-- Node.js 18+ recommended
-- npm or pnpm
-- Playwright browser dependencies
+These may include:
 
-Install project dependencies:
+* Page Objects
+* Components
+* Fixtures
+* Test Data
+* Data Factories
+* Business Flows
+* Utilities
+
+The Generator always checks for existing implementations before creating new ones.
+
+---
+
+## 4. Healer
+
+The **Healer** analyzes failed tests and attempts to resolve automation-related failures.
+
+It can help with:
+
+* Locator failures
+* Strict-mode violations
+* Changed selectors
+* Timeouts
+* Navigation issues
+* Synchronization problems
+* Test-data issues
+
+The Healer follows:
+
+```text
+Failure
+   ↓
+Analyze
+   ↓
+Identify Root Cause
+   ↓
+Apply Minimal Fix
+   ↓
+Re-run
+   ↓
+Verify
+```
+
+The Healer must **never weaken assertions or hide genuine application defects simply to make a test pass**.
+
+---
+
+# 🏗️ Architecture
+
+The framework follows a layered architecture.
+
+```text
+┌─────────────────────────────────────────┐
+│              AI AGENTS                  │
+│                                         │
+│ Planner → Implementer → Generator       │
+│                         ↓               │
+│                       Healer             │
+└───────────────────────┬─────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────┐
+│              TEST LAYER                 │
+│                                         │
+│             Playwright Tests            │
+└───────────────────────┬─────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────┐
+│           BUSINESS FLOW LAYER           │
+│                                         │
+│ Authentication / Registration / Checkout│
+└───────────────────────┬─────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────┐
+│            PAGE OBJECT LAYER            │
+│                                         │
+│ Login / Registration / Home / Checkout  │
+└───────────────────────┬─────────────────┘
+                        │
+                        ▼
+┌─────────────────────────────────────────┐
+│          PLAYWRIGHT / BROWSER           │
+└─────────────────────────────────────────┘
+```
+
+---
+
+# 📁 Project Structure
+
+```text
+AI_PlaywrightAutomation/
+│
+├── .github/
+│   └── workflows/
+│       └── ...
+│
+├── src/
+│   │
+│   ├── agents/
+│   │   ├── planner/
+│   │   ├── implementer/
+│   │   ├── generator/
+│   │   └── healer/
+│   │
+│   ├── pages/
+│   │   ├── home/
+│   │   ├── authentication/
+│   │   ├── account/
+│   │   └── checkout/
+│   │
+│   ├── components/
+│   │
+│   ├── flows/
+│   │   ├── AuthenticationFlow.ts
+│   │   └── ...
+│   │
+│   ├── fixtures/
+│   │
+│   ├── data/
+│   │   ├── UserFactory.ts
+│   │   └── ...
+│   │
+│   ├── managers/
+│   │
+│   ├── types/
+│   │
+│   └── utils/
+│
+├── tests/
+│   ├── authentication/
+│   ├── account/
+│   ├── checkout/
+│   └── ...
+│
+├── test-plan/
+│   ├── registration/
+│   └── ...
+│
+├── reports/
+│
+├── playwright.config.ts
+├── tsconfig.json
+├── package.json
+├── AGENTS.md
+├── README.md
+└── .gitignore
+```
+
+---
+
+# 🔧 Technology Stack
+
+| Technology      | Purpose                                               |
+| --------------- | ----------------------------------------------------- |
+| TypeScript      | Programming language                                  |
+| Playwright      | End-to-end browser automation                         |
+| Playwright Test | Test runner and assertions                            |
+| Node.js         | Runtime environment                                   |
+| AI Agents       | Test planning, implementation, generation and healing |
+| Git             | Version control                                       |
+| GitHub Actions  | CI/CD                                                 |
+| HTML Report     | Test reporting                                        |
+
+---
+
+# ⚙️ Prerequisites
+
+Install the following before using the framework:
+
+* Node.js
+* npm
+* Git
+* VS Code or another TypeScript-compatible IDE
+
+Verify Node.js:
+
+```bash
+node --version
+```
+
+Verify npm:
+
+```bash
+npm --version
+```
+
+---
+
+# 📦 Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+```
+
+Navigate into the project:
+
+```bash
+cd AI_PlaywrightAutomation
+```
+
+Install dependencies:
 
 ```bash
 npm install
@@ -106,106 +338,340 @@ npx playwright install
 
 ---
 
-## Running Tests
+# 🔐 Environment Configuration
 
-Run the full suite:
+Environment-specific configuration should be stored using environment variables.
+
+Example:
+
+```text
+BASE_URL=https://example.com
+```
+
+Do not commit secrets or credentials to Git.
+
+The `.env` file should be included in `.gitignore`.
+
+---
+
+# ▶️ Running Tests
+
+Run the complete Playwright test suite:
 
 ```bash
 npx playwright test
 ```
 
-Run a specific spec file:
+Run a specific test:
 
 ```bash
-npx playwright test tests/parabank-login-account-overview/positive-login-displays-account-overview.spec.ts
+npx playwright test tests/authentication/registration.spec.ts
 ```
 
-Run a test in headed mode for debugging:
+Run tests using a specific browser:
+
+```bash
+npx playwright test --project=chromium
+```
+
+Run tests in headed mode:
 
 ```bash
 npx playwright test --headed
 ```
 
-Run a single test by name:
+Run a specific test by title:
 
 ```bash
-npx playwright test -g "Positive login displays the account overview"
+npx playwright test -g "registration"
 ```
 
-Generate and view the HTML report:
+---
+
+# 📊 Test Reports
+
+After execution, Playwright can generate an HTML report.
+
+Open the report using:
 
 ```bash
 npx playwright show-report
 ```
 
----
-
-## Configuration
-
-The Playwright configuration is defined in `playwright.config.ts` and includes:
-
-- Test directory configuration
-- Parallel execution setup
-- Browser project definitions for Chromium, Firefox, and WebKit
-- Screenshot and video capture on failure
-- Trace capture on first retry
-
-This setup supports both local execution and CI integration.
+Reports and generated test artifacts should generally not be committed to Git.
 
 ---
 
-## Current Automation Coverage
+# 🧪 Example Automation Workflow
 
-The active suite validates core ParaBank functionality:
+A registration and login requirement is processed as follows:
 
-1. Positive login flow
-2. Successful account overview navigation
-3. Visibility of account summary elements
-4. Logout verification
-5. Negative login rejection for invalid credentials
-
-These scenarios provide a strong foundation for expanding automation into additional application modules.
-
----
-
-## Quality Standards
-
-The repository follows these engineering guardrails:
-
-- No hardcoded waits without business purpose
-- No secrets committed to source control
-- Test artifacts such as reports, traces, and screenshots are generated during runs and excluded from version control where appropriate
-- Selectors remain readable, stable, and maintainable
-- Page interactions are centralized to reduce duplication and improve resilience
-
----
-
-## Contribution Guidelines
-
-Contributions should align with the existing architecture and coding standards:
-
-- Add new scenarios under `tests/`
-- Prefer reusable page object methods for repeated flows
-- Keep test data in `src/test-data/`
-- Build reusable utilities in `src/utils/`
-- Use accessible locators and explicit assertions
-- Validate changes with focused Playwright runs before merging
-
-Example validation command:
-
-```bash
-npx playwright test tests/<spec-file>.spec.ts
+```text
+User Requirement
+       ↓
+Planner
+       ↓
+Registration Test Plan
+       ↓
+Implementer
+       ↓
+Registration Test
+       ↓
+Generator
+       ↓
+UserFactory / Page Objects / Flow
+       ↓
+Execute Test
+       ↓
+Healer if required
 ```
 
 ---
 
-## License
+# 🧱 Framework Components
 
-This project is licensed under the ISC license. See [LICENSE](LICENSE) for details.
+## Page Objects
+
+Page Objects encapsulate UI interactions and locators.
+
+Example:
+
+```text
+src/pages/authentication/LoginPage.ts
+src/pages/authentication/RegistrationPage.ts
+```
 
 ---
 
-## Summary
+## Business Flows
 
-This automation framework is structured to support enterprise-quality test engineering by combining strong browser automation practices, a maintainable architecture, and a clear path for scaling test coverage as the application grows.
+Flows represent multi-page business processes.
 
+Example:
+
+```text
+src/flows/AuthenticationFlow.ts
+```
+
+Possible operations:
+
+```text
+register()
+login()
+logout()
+```
+
+---
+
+## Test Data
+
+Test data is separated from test logic.
+
+Example:
+
+```text
+src/data/UserFactory.ts
+```
+
+Factories can generate dynamic data for scenarios such as user registration.
+
+---
+
+## Fixtures
+
+Fixtures provide reusable Playwright test setup and context.
+
+Examples:
+
+```text
+Browser
+Context
+Page
+Page Manager
+Authentication State
+Test Data
+```
+
+---
+
+## Utilities
+
+Generic reusable functionality belongs under:
+
+```text
+src/utils/
+```
+
+Examples:
+
+```text
+ConfigReader
+Logger
+FileUtils
+DateUtils
+```
+
+---
+
+# 🎯 Locator Strategy
+
+The framework prefers stable Playwright locators.
+
+
+
+---
+
+# 🩹 Self-Healing Philosophy
+
+The Healer follows a **root-cause-first** approach.
+
+Example:
+
+```text
+Strict Mode Violation
+        ↓
+Inspect locator
+        ↓
+Multiple elements found
+        ↓
+Identify intended element
+        ↓
+Use stable locator
+        ↓
+Re-run test
+```
+
+---
+
+# 🔄 Development Workflow
+
+Recommended development workflow:
+
+```text
+Create Feature Branch
+        ↓
+Define Requirement
+        ↓
+Planner
+        ↓
+Review Test Plan
+        ↓
+Implementer
+        ↓
+Generator
+        ↓
+Run Tests
+        ↓
+Healer
+        ↓
+Run Regression
+        ↓
+Commit
+        ↓
+Push
+        ↓
+Pull Request
+        ↓
+Merge
+```
+---
+
+# 🚀 CI/CD
+
+The framework is designed to support automated execution through GitHub Actions.
+
+Typical CI pipeline:
+
+```text
+Push / Pull Request
+        ↓
+Install Dependencies
+        ↓
+Install Playwright Browsers
+        ↓
+Run TypeScript Checks
+        ↓
+Run Playwright Tests
+        ↓
+Generate Report
+        ↓
+Publish Artifacts
+```
+
+CI configuration belongs under:
+
+```text
+.github/workflows/
+```
+
+---
+
+# 🛡️ Engineering Principles
+
+The framework follows these principles:
+
+### 1. Reuse Before Create
+
+Always check whether functionality already exists before creating new code.
+
+### 2. Single Responsibility
+
+Each class and file should have one clear responsibility.
+
+### 3. Stable Locators
+
+Prefer reliable semantic locators.
+
+### 4. Business-Focused Tests
+
+Tests should validate business behavior rather than implementation details.
+
+### 5. Minimal Changes
+
+Agents should make the smallest safe change required.
+
+### 6. Root-Cause Fixes
+
+Failures should be diagnosed before modifying code.
+
+### 7. No False Positives
+
+Tests must not be weakened simply to make them pass.
+
+### 8. Maintainability
+
+Generated code must remain understandable and maintainable by human developers.
+
+---
+
+# 📚 Documentation
+
+| Document     | Purpose                                      |
+| ------------ | -------------------------------------------- |
+| `README.md`  | Project overview and developer documentation |
+| `AGENTS.md`  | Rules and instructions for AI agents         |
+| `test-plan/` | Test planning artifacts                      |
+
+---
+
+# 🎯 Project Goal
+
+The goal of this project is to build a scalable AI-assisted automation framework where a tester can provide a natural-language requirement and the framework can systematically:
+
+```text
+Plan
+ ↓
+Implement
+ ↓
+Generate
+ ↓
+Execute
+ ↓
+Heal
+ ↓
+Verify
+```
+
+while maintaining the quality, reliability, and engineering standards expected from an enterprise automation framework.
+
+---
