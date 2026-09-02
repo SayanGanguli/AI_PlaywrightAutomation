@@ -6,5 +6,4 @@ playwright-report/
 !.env.example
 .playwright-mcp/
 playwright-report/
-test-results/
 reports/
