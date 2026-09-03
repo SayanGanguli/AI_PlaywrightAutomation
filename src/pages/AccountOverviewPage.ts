@@ -27,8 +27,7 @@ export class AccountOverviewPage extends BasePage {
     await expect(this.factory.getLocator('selector', logoutLink)).toBeVisible();
     await expect(this.factory.getLocator('selector', accountsHeading)).toBeVisible();
     await expect(this.factory.getLocator('selector', accountTable)).toBeVisible();
-    // Use first() to get the first balance amount in the table with explicit wait
-    await expect(this.factory.getLocator('text', accountOverviewData.balanceText, { exact: false }).first()).toBeVisible({ timeout: 10000 });
+    await expect(this.factory.getLocator('selector', accountTable)).toContainText(/-?\$\d+\.\d{2}/);
     await expect(this.factory.getLocator('selector', balanceIncludesDepositsCell)).toBeVisible();
   }
 

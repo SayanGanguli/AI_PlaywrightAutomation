@@ -3,7 +3,7 @@ import { LoginPage } from '../../src/pages/LoginPage';
 import { getConfig } from '../../src/components/Helper';
 
 test.describe('ParaBank Authentication and Account Overview', () => {
-  test('Negative login rejects invalid credentials and protects account data', async ({ page }) => {
+  test('Negative login rejects invalid credentials and protects account data', { tag: ['@login', '@account-overview', '@negative'] }, async ({ page }) => {
     const loginPage = new LoginPage(page);
     const { invalidUsername, invalidPassword } = getConfig();
 

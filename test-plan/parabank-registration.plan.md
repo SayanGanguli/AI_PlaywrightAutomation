@@ -2,34 +2,55 @@
 
 ## Application Overview
 
-ParaBank registration starts from the Register link on index.htm and opens register.htm, titled 'ParaBank | Register for Free Online Account Access'. The registration POST form contains first name, last name, street address, city, state, ZIP code, optional phone number, SSN, username, password, repeated password, and a Register submit control. Empty submission visibly returns required messages for all fields except phone. A complete submission with mismatched passwords returns 'Passwords did not match.' A duplicate username returns 'This username already exists.' A successful registration destination and exact success message could not be verified because the live environment reported the generated test usernames as existing; this is explicitly marked UNKNOWN in the plan.
+ParaBank registration is available from the landing page through the **Register** link and opens the registration page at `/register.htm`.
+
+The registration form supports the required user details, username, password, and password confirmation.
+
+Registration test data must be reused from:
+
+`src/test-data/test-data.json`
+
+The username must be generated dynamically at runtime using the format:
+
+`TestAuto<random two digit number>`
+
+Example: `TestAuto42`
 
 ## Test Scenarios
 
 ### 1. parabank-registration
 
+#### 1.1. valid registration creates a new account
 
-#### 1.1. registration page is reachable from the landing page
-
-**File:** `tests/parabank-registration/registration-entry-point.spec.ts`
-
-**Steps:**
-  1. Open the configured ParaBank URL.
-    - expect: The page title is 'ParaBank | Welcome | Online Banking'.
-  2. Click the 'Register' link.
-    - expect: The URL contains /register.htm.
-    - expect: The page title is 'ParaBank | Register for Free Online Account Access'.
-    - expect: The 'Signing up is easy!' heading is visible.
-    - expect: The registration fields and Register control are visible.
-
-#### 1.2. valid registration creates a new account
-
-**File:** `tests/parabank-registration/positive-registration-creates-account.spec.ts`
+**File:** `tests/parabank-registration/valid-registration-creates-account.spec.ts`
 
 **Steps:**
-  1. Open the registration page through the Register link.
-    - expect: The registration form is displayed.
-  2. Generate a unique username and provide valid values for first name, last name, street, city, state, ZIP, SSN, password, and matching confirmation; phone may be omitted because it was observed as optional.
-    - expect: All submitted values are accepted by the form.
-  3. Click Register.
-    - expect: UNKNOWN: The exact success message, URL, authenticated state, and post-registration navigation could not be verified against the live environment. Confirm the expected successful destination before implementation.
+
+1. Open the configured ParaBank URL and navigate to the registration page through the **Register** link.
+   - **expect:** The registration page is displayed and the registration form is visible.
+
+2. Use the existing registration data from `src/test-data/test-data.json`.
+   - **expect:** The existing framework test data is reused; registration values are not duplicated in the test.
+
+3. Generate a unique username using the format `TestAuto<random two digit number>`.
+   - **expect:** The generated username matches `^TestAuto\d{2}$`.
+
+4. Complete the registration form using the existing test data and generated username.
+   - **expect:** All required fields are populated and the password confirmation matches the password.
+
+5. Submit the registration form.
+   - **expect:** The registration is successfully submitted and the application reaches the successful registration state.
+
+6. Verify the successful registration result using the existing framework/page-object conventions.
+   - **expect:** The expected successful registration confirmation or destination is displayed.
+
+## Implementation Constraints
+
+- Only **one test case** should be implemented for registration.
+- Do not create separate negative, validation, duplicate-username, or entry-point test cases.
+- Reuse `src/test-data/test-data.json`; do not duplicate its values in the spec.
+- Generate the username dynamically as `TestAuto<random two digit number>`.
+- Reuse existing Page Objects, fixtures, utilities, locators, and framework patterns.
+- Do not introduce duplicate framework components.
+- Preserve the existing project structure and coding style.
+- Keep the implementation minimal and isolated to the valid registration scenario.

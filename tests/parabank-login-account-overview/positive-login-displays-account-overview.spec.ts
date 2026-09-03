@@ -4,7 +4,7 @@ import { LoginPage } from '../../src/pages/LoginPage';
 import { getConfig } from '../../src/components/Helper';
 
 test.describe('ParaBank Authentication and Account Overview', () => {
-  test('Positive login displays the account overview', async ({ page }) => {
+  test('Positive login displays the account overview', { tag: ['@login', '@account-overview', '@positive'] }, async ({ page }) => {
     const loginPage = new LoginPage(page);
     const accountOverviewPage = new AccountOverviewPage(page);
     const { validUsername, validPassword } = getConfig();

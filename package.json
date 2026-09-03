@@ -6,6 +6,8 @@
   "scripts": {
     "test": "playwright test",
     "test:headed": "playwright test --headed",
+    "test:login": "playwright test --grep @login",
+    "test:registration": "playwright test --grep @registration",
     "test:debug": "playwright test --debug",
     "test:report": "playwright show-report",
     "format": "prettier --write ."
