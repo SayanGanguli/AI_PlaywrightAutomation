@@ -604,6 +604,11 @@ CI configuration belongs under:
 .github/workflows/
 ```
 
+The Playwright pipeline runs automatically every day at midnight IST
+(`18:30 UTC` on the previous day) and can also be started manually from the
+GitHub Actions tab. Each run publishes the HTML report and
+`reports/test-metrics.json` as workflow artifacts.
+
 ---
 
 # 🛡️ Engineering Principles
