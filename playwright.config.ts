@@ -15,6 +15,10 @@ const selectedBrowser = browserConfigs[browserName as keyof typeof browserConfig
 export default defineConfig({
   testDir: './tests',
 
+  globalSetup: './src/fixtures/global-setup.ts',
+
+  globalTeardown: './src/fixtures/global-teardown.ts',
+
   fullyParallel: true,
 
   forbidOnly: !!process.env.CI,
